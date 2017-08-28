@@ -878,9 +878,9 @@ maf-logger@^0.4.0:
   dependencies:
     bunyan "^1.8.12"
 
-maf-rest@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/maf-rest/-/maf-rest-0.10.0.tgz#2c0a1e5d440f3214a2228da148f8001d1fbcebb3"
+maf-rest@^0.11.1:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/maf-rest/-/maf-rest-0.11.1.tgz#347f8a064c844dbc56912292fe33ca86d3b214ee"
   dependencies:
     body-parser "^1.17.2"
     joi "^10.6.0"
