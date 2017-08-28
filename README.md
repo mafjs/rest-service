@@ -21,7 +21,7 @@ var joi = service.joi;
 service.addMethods({
     'GET /': {
 
-        handler: function (req, res, next) {
+        handler: function (req, res) {
             res.result(['here', 'we', 'are']);
         }
     },
