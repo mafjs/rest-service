@@ -1,6 +1,7 @@
 'use strict';
 
 var joi = require('joi');
+var superagent = require('superagent');
 
 var init = {
     logger: require('./init/logger'),
@@ -15,6 +16,7 @@ class RestService {
 
     constructor (name) {
         this.joi = joi;
+        this.superagent = superagent;
 
         this._logger = init.logger(name);
 
