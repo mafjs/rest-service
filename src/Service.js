@@ -1,5 +1,7 @@
 'use strict';
 
+var joi = require('joi');
+
 var init = {
     logger: require('./init/logger'),
     config: require('./init/config'),
@@ -12,6 +14,8 @@ var init = {
 class RestService {
 
     constructor (name) {
+        this.joi = joi;
+
         this._logger = init.logger(name);
 
         init.globalErrorHandlers(this._logger);
@@ -106,7 +110,7 @@ class RestService {
         this._app.use((error, req, res, next) => {
             var logger = req.logger || this._logger;
 
-            logger.error(error);
+            logger.error({req, err: error});
 
             res.status(500).json({
                 error: {
