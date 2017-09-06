@@ -20,7 +20,7 @@
     "lodash": "^4.17.4",
     "maf-config": "^1.2.0",
     "maf-error": "^1.2.0",
-    "maf-logger": "^0.4.0",
+    "maf-logger": "^0.6.1",
     "maf-rest": "^0.11.1",
     "maf-service-locator": "^0.3.0",
     "morgan": "^1.8.2",
