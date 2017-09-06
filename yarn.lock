@@ -872,9 +872,9 @@ maf-kind-of@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/maf-kind-of/-/maf-kind-of-0.1.0.tgz#6aaa551093c979aefcae795fd5dab71b8563e50d"
 
-maf-logger@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/maf-logger/-/maf-logger-0.4.0.tgz#6b94190bdd4df67dfad370edc5e1119894396c8c"
+maf-logger@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/maf-logger/-/maf-logger-0.6.1.tgz#045ee7852a30dee8a71df191eb7c1a49f1a18e9b"
   dependencies:
     bunyan "^1.8.12"
 
