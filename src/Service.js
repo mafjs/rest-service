@@ -63,11 +63,19 @@ class RestService {
     }
 
     initApp () {
+        if (this._appInited) {
+            return;
+        }
+
         this._app = init.server(this._logger, this._config, this._di);
         this._appInited = true;
     }
 
     initRest () {
+        if (this._restInited) {
+            return Promise.resolve();
+        }
+
         var promises = [];
 
         for (var methods of this._restMethods) {
@@ -76,7 +84,10 @@ class RestService {
 
         this._restInited = true;
 
-        return Promise.all(promises);
+        return Promise.all(promises)
+            .then(() => {
+                return this._rest.init(this._app, this._di);
+            });
     }
 
     listen () {
@@ -84,19 +95,9 @@ class RestService {
 
         return new Promise((resolve, reject) => {
 
-            if (!this._appInited) {
-                this.initApp();
-            }
+            this.initApp();
 
-            let promise = null;
-
-            if (!this._restInited) {
-                promise = this.initRest();
-            } else {
-                promise = Promise.resolve();
-            }
-
-            promise
+            this.initRest()
                 .then(() => {
                     this._listen();
                     resolve();
