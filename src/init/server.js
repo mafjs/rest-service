@@ -24,7 +24,7 @@ module.exports = function (logger, config, di) {
 
     app.use(cors(config.get('cors')));
 
-    app.use(function (req, res, next) {
+    app.use(function initDi (req, res, next) {
         req.di = di;
         next();
     });

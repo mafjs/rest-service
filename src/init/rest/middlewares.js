@@ -1,6 +1,6 @@
 module.exports = function (rest) {
 
-    rest.setBeforeResponseMiddleware(function (req, res) {
+    rest.setBeforeResponseMiddleware(function beforeResponseMiddleware (req, res) {
 
         if (!res.httpContext) {
 

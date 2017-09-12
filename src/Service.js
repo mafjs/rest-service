@@ -98,9 +98,6 @@ class RestService {
 
             promise
                 .then(() => {
-                    return this._rest.init(this._app, this._di);
-                })
-                .then(() => {
                     this._listen();
                     resolve();
                 })
@@ -118,16 +115,6 @@ class RestService {
         var port = this._config.get('port');
 
         // eslint-disable-next-line no-unused-vars
-        this._app.use(function (req, res, next) {
-            res.status(404).json({
-                error: {
-                    code: 'RESOURCE_NOT_FOUND',
-                    message: 'resource not found'
-                }
-            });
-        });
-
-        // eslint-disable-next-line no-unused-vars
         this._app.use((error, req, res, next) => {
             var logger = req.logger || this._logger;
 
@@ -137,6 +124,16 @@ class RestService {
                 error: {
                     code: 'SERVER_ERROR',
                     message: 'server error'
+                }
+            });
+        });
+
+        // eslint-disable-next-line no-unused-vars
+        this._app.use(function notFound (req, res, next) {
+            res.status(404).json({
+                error: {
+                    code: 'RESOURCE_NOT_FOUND',
+                    message: 'resource not found'
                 }
             });
         });
