@@ -1,8 +1,5 @@
 'use strict';
 
-var joi = require('joi');
-var superagent = require('superagent');
-
 var init = {
     logger: require('./init/logger'),
     config: require('./init/config'),
@@ -15,9 +12,6 @@ var init = {
 class RestService {
 
     constructor (name) {
-        this.joi = joi;
-        this.superagent = superagent;
-
         this._logger = init.logger(name);
 
         init.globalErrorHandlers(this._logger);
@@ -28,7 +22,11 @@ class RestService {
 
         this._app = null;
 
+        this._appInited = false;
+
         this._rest = init.rest(this._logger, this._config);
+
+        this._restInited = false;
 
         this._server = null;
 
@@ -64,20 +62,41 @@ class RestService {
         this._restMethods.push(methods);
     }
 
+    initApp () {
+        this._app = init.server(this._logger, this._config, this._di);
+        this._appInited = true;
+    }
+
+    initRest () {
+        var promises = [];
+
+        for (var methods of this._restMethods) {
+            promises.push(this._rest.addMethods(methods));
+        }
+
+        this._restInited = true;
+
+        return Promise.all(promises);
+    }
+
     listen () {
 
 
         return new Promise((resolve, reject) => {
 
-            this._app = init.server(this._logger, this._config, this._di);
-
-            var promises = [];
-
-            for (var methods of this._restMethods) {
-                promises.push(this._rest.addMethods(methods));
+            if (!this._appInited) {
+                this.initApp();
             }
 
-            Promise.all(promises)
+            let promise = null;
+
+            if (!this._restInited) {
+                promise = this.initRest();
+            } else {
+                promise = Promise.resolve();
+            }
+
+            promise
                 .then(() => {
                     return this._rest.init(this._app, this._di);
                 })
