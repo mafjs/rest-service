@@ -11,8 +11,10 @@ var init = {
 
 class RestService {
 
-    constructor (name) {
-        this._logger = init.logger(name);
+    constructor (name, options) {
+        options = options || {};
+
+        this._logger = init.logger(name, options.logger);
 
         init.globalErrorHandlers(this._logger);
 
@@ -118,6 +120,19 @@ class RestService {
         // eslint-disable-next-line no-unused-vars
         this._app.use((error, req, res, next) => {
             var logger = req.logger || this._logger;
+
+            // for superagent errors
+            var errorContext = {err: error};
+
+            if (error.response) {
+                errorContext.res = error.response;
+
+                if (error.response.req) {
+                    errorContext.req = error.response.req;
+                }
+            }
+
+            logger.error(errorContext);
 
             logger.error({req, err: error});
 
