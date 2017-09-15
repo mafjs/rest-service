@@ -127,8 +127,8 @@ class RestService {
             if (error.response) {
                 errorContext.res = error.response;
 
-                if (error.response.req) {
-                    errorContext.req = error.response.req;
+                if (error.req) {
+                    errorContext.req = error.req;
                 }
             }
 
