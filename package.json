@@ -13,7 +13,7 @@
   "author": "alekzonder <alekzonder@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.18.0",
+    "body-parser": "^1.18.1",
     "cors": "^2.8.4",
     "express": "^4.15.4",
     "joi": "^10.6.0",
@@ -21,7 +21,7 @@
     "maf-config": "^1.2.0",
     "maf-error": "^1.2.0",
     "maf-logger": "^0.6.1",
-    "maf-rest": "^0.11.1",
+    "maf-rest": "^0.12.0",
     "maf-service-locator": "^0.3.0",
     "morgan": "^1.8.2",
     "repl-extra": "^0.1.3",
