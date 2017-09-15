@@ -1,6 +1,6 @@
 {
   "name": "@maf/rest-service",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "maf rest service",
   "main": "index.js",
   "private": false,
