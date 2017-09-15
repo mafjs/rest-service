@@ -124,12 +124,12 @@ class RestService {
             // for superagent errors
             var errorContext = {err: error};
 
-            if (error.response) {
-                errorContext.res = error.response;
+            if (error.req) {
+                errorContext.req = error.req;
+            }
 
-                if (error.req) {
-                    errorContext.req = error.req;
-                }
+            if (error.res) {
+                errorContext.res = error.res;
             }
 
             logger.error(errorContext);
