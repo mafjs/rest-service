@@ -1,5 +1,7 @@
 'use strict';
 
+var joi = require('maf-rest/joi');
+
 var init = {
     logger: require('./init/logger'),
     config: require('./init/config'),
@@ -33,6 +35,8 @@ class RestService {
         this._server = null;
 
         this._restMethods = [];
+
+        this.joi = joi;
 
     }
 

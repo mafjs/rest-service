@@ -8,7 +8,26 @@ service.app.use(function (req, res, next) {
     next();
 });
 
+const joi = service.joi;
+
 service.addMethods({
+    'GET /test1': {
+        schema: {
+            query: joi.object().required().keys({
+                id: joi.string().required()
+            })
+        },
+
+        // middlewares: [
+        //     function (req, res) {
+        //         res.badRequest({message: 'test'});
+        //     }
+        // ],
+
+        handler: function (req, res) {
+            res.json('test1');
+        }
+    },
     'GET /test': function (req, res) {
         res.result(req.test);
     }
