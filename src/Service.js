@@ -12,30 +12,33 @@ const init = {
 /* eslint-enable */
 
 class RestService {
-    constructor(name, rawOptions) {
-        const options = rawOptions || {};
+    constructor(name, rawConfig) {
+        this.joi = joi;
 
-        this._logger = init.logger(name, options.logger);
+        const logLevel = (rawConfig && rawConfig.logLevel) ? rawConfig.logLevel : null;
+
+        this._logger = init.logger(name, logLevel);
 
         init.globalErrorHandlers(this._logger);
 
-        this._config = init.config();
+        this._config = init.config(rawConfig);
 
         this._di = {};
 
-        this._app = null;
-
         this._appInited = false;
+        this._restInited = false;
+
+        this._app = null;
+        this._server = null;
+
+        this._rest = null;
+        this._restMethods = [];
 
         this._rest = init.rest(this._logger, this._config);
 
-        this._restInited = false;
-
-        this._server = null;
-
-        this._restMethods = [];
-
-        this.joi = joi;
+        if (this._config.get('autoInit') === true) {
+            this.initApp();
+        }
     }
 
     get logger() {
@@ -66,6 +69,10 @@ class RestService {
         this._restMethods.push(methods);
     }
 
+    setEndpoint(endpoint) {
+        this._rest.setEndpoint(endpoint);
+    }
+
     initApp() {
         if (this._appInited) {
             return;
@@ -93,8 +100,8 @@ class RestService {
             .then(() => this._rest.init(this._app, this._di));
     }
 
-    listen() {
-        return new Promise((resolve, reject) => {
+    start() {
+        return new Promise((resolve /* , reject */) => {
             this.initApp();
 
             this.initRest()
@@ -104,7 +111,7 @@ class RestService {
                 })
                 .catch((error) => {
                     this._logger.error(error);
-                    reject(error);
+                    process.exit(255);
                 });
         });
     }

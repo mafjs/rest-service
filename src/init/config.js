@@ -1,15 +1,17 @@
 const Config = require('maf-config');
 
-module.exports = function restServiceInitConfig() {
+module.exports = function restServiceInitConfig(rawConfig) {
     const config = new Config();
 
     const env = process.env;
 
-    const host = env.CONFIG_HOST || null;
-    const port = env.CONFIG_PORT || 3000;
-    const publicBaseUrl = env.PUBLIC_BASE_URL || `http://localhost:${port}`;
+    const host = env.HOST || null;
+    const port = env.PORT || 3000;
+    const publicBaseUrl = env.CONFIG_PUBLIC_BASE_URL || `http://localhost:${port}`;
 
     config.setRaw('.', {
+        autoInit: true,
+        logLevel: null,
         host,
         port,
         publicBaseUrl,
@@ -37,6 +39,10 @@ module.exports = function restServiceInitConfig() {
             rotateInterval: '1d'
         }
     });
+
+    if (typeof rawConfig !== 'undefined') {
+        config.mergeRaw(rawConfig);
+    }
 
     return config;
 };
