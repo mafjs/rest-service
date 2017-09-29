@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@maf/eslint-config@^0.3.6":
+"@maf/eslint-config@^0.3.7":
   version "0.3.7"
   resolved "https://registry.yarnpkg.com/@maf/eslint-config/-/eslint-config-0.3.7.tgz#0b72edd12a7e090ca209f78f7b52baa0c91db83e"
   dependencies:
@@ -1009,7 +1009,7 @@ maf-logger@^0.6.1:
   dependencies:
     bunyan "^1.8.12"
 
-maf-rest@^0.15.0-beta.4:
+maf-rest@^0.15.0:
   version "0.15.0"
   resolved "https://registry.yarnpkg.com/maf-rest/-/maf-rest-0.15.0.tgz#3742dc7f1cacc617abbc344bc8ca7f8370ae940c"
   dependencies:
