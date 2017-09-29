@@ -1,5 +1,8 @@
-var service = require('../index')('maf-rest-service');
+var service = require('../index')('maf-rest-service', {init: false});
 
+service.di = {
+    test: 100500
+};
 
 service.initApp();
 
@@ -18,14 +21,25 @@ service.addMethods({
             })
         },
 
-        // middlewares: [
-        //     function (req, res) {
-        //         res.badRequest({message: 'test'});
-        //     }
-        // ],
+        middlewares: [
+            function (req, res, next) {
+                if (req.query.id > 1) {
+
+                    return res.badRequest({
+                        message: 'invalid id',
+                        code: 'BAD_REQUEST'
+                    });
+
+                } else {
+
+                    return next();
+                }
+
+            }
+        ],
 
         handler: function (req, res) {
-            res.json('test1');
+            res.result(req.di.test);
         }
     },
     'GET /test': function (req, res) {

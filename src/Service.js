@@ -52,16 +52,16 @@ class RestService {
         return this._di;
     }
 
+    set di (di) {
+        this._di = di;
+    }
+
     get app () {
         return this._app;
     }
 
     get rest () {
         return this._rest;
-    }
-
-    setDi (di) {
-        this._di = di;
     }
 
     addMethods (methods) {
@@ -120,43 +120,6 @@ class RestService {
     _listen () {
         var host = this._config.get('host');
         var port = this._config.get('port');
-
-        // eslint-disable-next-line no-unused-vars
-        this._app.use((error, req, res, next) => {
-            var logger = req.logger || this._logger;
-
-            // for superagent errors
-            var errorContext = {err: error};
-
-            if (error.req) {
-                errorContext.req = error.req;
-            }
-
-            if (error.res) {
-                errorContext.res = error.res;
-            }
-
-            logger.error(errorContext);
-
-            logger.error({req, err: error});
-
-            res.status(500).json({
-                error: {
-                    code: 'SERVER_ERROR',
-                    message: 'server error'
-                }
-            });
-        });
-
-        // eslint-disable-next-line no-unused-vars
-        this._app.use(function notFound (req, res, next) {
-            res.status(404).json({
-                error: {
-                    code: 'RESOURCE_NOT_FOUND',
-                    message: 'resource not found'
-                }
-            });
-        });
 
         this._server = this._app.listen(port, host, () => {
             this._logger.info(`listen on ${host}:${port}`);

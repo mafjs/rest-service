@@ -1,11 +1,7 @@
 var Rest = require('maf-rest');
 
-var middlewares = require('./middlewares');
-
-module.exports = function (logger, config) {
+module.exports = function (logger) {
     var rest = new Rest(logger.getLogger('rest'));
-
-    middlewares(rest);
 
     return rest;
 };
