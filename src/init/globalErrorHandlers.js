@@ -1,4 +1,4 @@
-module.exports = function (logger) {
+module.exports = function restServiceInitGlobalErrorHandlers(logger) {
     process.on('uncaughtException', (error) => {
         logger.fatal(error);
     });
@@ -6,5 +6,4 @@ module.exports = function (logger) {
     process.on('unhandledRejection', (reason, p) => {
         logger.fatal(reason, p);
     });
-
 };

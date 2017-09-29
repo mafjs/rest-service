@@ -1,4 +1,4 @@
-var service = require('../index')('maf-rest-service', {init: false});
+const service = require('../index')('maf-rest-service', { init: false });
 
 service.di = {
     test: 100500
@@ -6,7 +6,7 @@ service.di = {
 
 service.initApp();
 
-service.app.use(function (req, res, next) {
+service.app.use((req, res, next) => {
     req.test = 100500;
     next();
 });
@@ -22,35 +22,29 @@ service.addMethods({
         },
 
         middlewares: [
-            function (req, res, next) {
+            function testMiddleware(req, res, next) {
                 if (req.query.id > 1) {
-
                     return res.badRequest({
                         message: 'invalid id',
                         code: 'BAD_REQUEST'
                     });
-
-                } else {
-
-                    return next();
                 }
 
+                return next();
             }
         ],
 
-        handler: function (req, res) {
+        handler(req, res) {
             res.result(req.di.test);
         }
     },
-    'GET /test': function (req, res) {
+    'GET /test': function testGet(req, res) {
         res.result(req.test);
     }
 });
 
 service.initRest()
-    .then(() => {
-        return service.listen();
-    })
+    .then(() => service.listen())
     .then(() => {
         service.logger.info('ready');
     })

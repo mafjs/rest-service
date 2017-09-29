@@ -1,8 +1,7 @@
-'use strict';
+const joi = require('maf-rest/joi');
 
-var joi = require('maf-rest/joi');
-
-var init = {
+/* eslint-disable global-require */
+const init = {
     logger: require('./init/logger'),
     config: require('./init/config'),
     globalErrorHandlers: require('./init/globalErrorHandlers'),
@@ -10,11 +9,11 @@ var init = {
     processSignals: require('./init/processSignals'),
     rest: require('./init/rest')
 };
+/* eslint-enable */
 
 class RestService {
-
-    constructor (name, options) {
-        options = options || {};
+    constructor(name, rawOptions) {
+        const options = rawOptions || {};
 
         this._logger = init.logger(name, options.logger);
 
@@ -37,38 +36,37 @@ class RestService {
         this._restMethods = [];
 
         this.joi = joi;
-
     }
 
-    get logger () {
+    get logger() {
         return this._logger;
     }
 
-    get config () {
+    get config() {
         return this._config;
     }
 
-    get di () {
+    get di() {
         return this._di;
     }
 
-    set di (di) {
+    set di(di) {
         this._di = di;
     }
 
-    get app () {
+    get app() {
         return this._app;
     }
 
-    get rest () {
+    get rest() {
         return this._rest;
     }
 
-    addMethods (methods) {
+    addMethods(methods) {
         this._restMethods.push(methods);
     }
 
-    initApp () {
+    initApp() {
         if (this._appInited) {
             return;
         }
@@ -77,30 +75,26 @@ class RestService {
         this._appInited = true;
     }
 
-    initRest () {
+    initRest() {
         if (this._restInited) {
             return Promise.resolve();
         }
 
-        var promises = [];
+        const promises = [];
 
-        for (var methods of this._restMethods) {
+        Object.keys(this._restMethods).forEach((key) => {
+            const methods = this._restMethods[key];
             promises.push(this._rest.addMethods(methods));
-        }
+        });
 
         this._restInited = true;
 
         return Promise.all(promises)
-            .then(() => {
-                return this._rest.init(this._app, this._di);
-            });
+            .then(() => this._rest.init(this._app, this._di));
     }
 
-    listen () {
-
-
+    listen() {
         return new Promise((resolve, reject) => {
-
             this.initApp();
 
             this.initRest()
@@ -112,14 +106,12 @@ class RestService {
                     this._logger.error(error);
                     reject(error);
                 });
-
         });
-
     }
 
-    _listen () {
-        var host = this._config.get('host');
-        var port = this._config.get('port');
+    _listen() {
+        const host = this._config.get('host');
+        const port = this._config.get('port');
 
         this._server = this._app.listen(port, host, () => {
             this._logger.info(`listen on ${host}:${port}`);
@@ -127,7 +119,6 @@ class RestService {
 
         init.processSignals(this._logger, this._server);
     }
-
 }
 
 module.exports = RestService;

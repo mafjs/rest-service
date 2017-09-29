@@ -1,18 +1,18 @@
-var Config = require('maf-config');
+const Config = require('maf-config');
 
-module.exports = function () {
-    var config = new Config();
+module.exports = function restServiceInitConfig() {
+    const config = new Config();
 
-    var env = process.env;
+    const env = process.env;
 
-    var host = env.CONFIG_HOST || null;
-    var port = env.CONFIG_PORT || 3000;
-    var publicBaseUrl = env.PUBLIC_BASE_URL || `http://localhost:${port}`;
+    const host = env.CONFIG_HOST || null;
+    const port = env.CONFIG_PORT || 3000;
+    const publicBaseUrl = env.PUBLIC_BASE_URL || `http://localhost:${port}`;
 
     config.setRaw('.', {
-        host: host,
-        port: port,
-        publicBaseUrl: publicBaseUrl,
+        host,
+        port,
+        publicBaseUrl,
         cors: {
             origin: '*',
             preflightContinue: true,

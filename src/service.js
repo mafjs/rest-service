@@ -2,10 +2,10 @@ require('source-map-support').install();
 
 require('maf-error/initGlobal');
 
-var Service = require('./Service');
+const Service = require('./Service');
 
-module.exports = function (name) {
-    var service = new Service(name);
+module.exports = function restServiceCreateService(name) {
+    const service = new Service(name);
 
     return service;
 };

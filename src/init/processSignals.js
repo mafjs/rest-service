@@ -1,26 +1,23 @@
-module.exports = function (logger, server) {
-
-    var signals = {
-        'SIGINT': 2,
-        'SIGTERM': 15
+module.exports = function restServiceInitProcessSignals(logger, server) {
+    const signals = {
+        SIGINT: 2,
+        SIGTERM: 15
     };
 
-    var connections = {};
+    const connections = {};
 
-    server.on('connection', function (connection) {
-
-        var key = connection.remoteAddress + ':' + connection.remotePort;
+    server.on('connection', (connection) => {
+        const key = `${connection.remoteAddress}:${connection.remotePort}`;
 
         connections[key] = connection;
 
-        connection.on('close', function () {
+        connection.on('close', () => {
             delete connections[key];
         });
-
     });
 
-    function shutdown (signal, value) {
-        var promises = [];
+    function shutdown(signal, value) {
+        const promises = [];
 
         // TODO add callback for stopping other clien
 
@@ -44,28 +41,24 @@ module.exports = function (logger, server) {
         // }));
 
         promises.push(new Promise((resolve, reject) => {
-
             logger.info('stopping http server');
 
-            server.close(function () {
-                logger.info('http server stopped by ' + signal);
+            server.close(() => {
+                logger.info(`http server stopped by ${signal}`);
                 resolve();
             });
 
-            server.getConnections(function (error, count) {
-
+            server.getConnections((error, count) => {
                 if (error) {
                     return reject(error);
                 }
 
-                for (var key in connections) {
+                Object.keys(connections).forEach((key) => {
                     connections[key].destroy();
-                }
+                });
 
-                logger.info(`http server: destroy ${count} connections`);
-
+                return logger.info(`http server: destroy ${count} connections`);
             });
-
         }));
 
         Promise.all(promises)
@@ -77,17 +70,13 @@ module.exports = function (logger, server) {
                 logger.error(error);
                 process.exit(128 + value);
             });
-
     }
 
 
-    Object.keys(signals).forEach(function (signal) {
-
-        process.on(signal, function () {
+    Object.keys(signals).forEach((signal) => {
+        process.on(signal, () => {
             logger.info(`CATCH SIGNAL ${signal}`);
             shutdown(signal, signals[signal]);
         });
-
     });
-
 };
