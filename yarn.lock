@@ -3,8 +3,8 @@
 
 
 "@maf/eslint-config@^0.3.4":
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/@maf/eslint-config/-/eslint-config-0.3.4.tgz#82e29de3d3a63f2de93d345586f08cd103b037e0"
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/@maf/eslint-config/-/eslint-config-0.3.5.tgz#f20b21dba31ac88bff735efdad2b102b6ead93d5"
   dependencies:
     babel-eslint "^8.0.0"
     eslint "^4.7.2"
@@ -1000,9 +1000,9 @@ maf-error@^1.2.0:
   dependencies:
     terror "1.4.x"
 
-maf-http@^0.9.0-beta.3:
-  version "0.9.0-beta.3"
-  resolved "https://registry.yarnpkg.com/maf-http/-/maf-http-0.9.0-beta.3.tgz#345475dbe875182c30dcea3ddf1ff56206210a13"
+maf-http@^0.9.0-beta.5:
+  version "0.9.0-beta.5"
+  resolved "https://registry.yarnpkg.com/maf-http/-/maf-http-0.9.0-beta.5.tgz#97c8fc2e351b19cc7c5eec659ba47371914164f5"
   dependencies:
     joi "^11.1.1"
     lodash.get "^4.4.2"
@@ -1023,13 +1023,13 @@ maf-logger@^0.6.1:
     bunyan "^1.8.12"
 
 maf-rest@^0.15.0-beta.2:
-  version "0.15.0-beta.2"
-  resolved "https://registry.yarnpkg.com/maf-rest/-/maf-rest-0.15.0-beta.2.tgz#29ed50792726425e1996aa78fc83982aa631f154"
+  version "0.15.0-beta.3"
+  resolved "https://registry.yarnpkg.com/maf-rest/-/maf-rest-0.15.0-beta.3.tgz#8dcea7d8bf4c42b8313b706a332b77202db08285"
   dependencies:
     body-parser "^1.18.2"
     lodash "^4.17.4"
     maf-error "^1.2.0"
-    maf-http "^0.9.0-beta.3"
+    maf-http "^0.9.0-beta.5"
     maf-kind-of "^0.1.0"
 
 maf-service-locator@^0.3.0:

@@ -22,7 +22,7 @@
     "maf-config": "^1.2.0",
     "maf-error": "^1.2.0",
     "maf-logger": "^0.6.1",
-    "maf-rest": "^0.15.0-beta.2",
+    "maf-rest": "^0.15.0-beta.3",
     "maf-service-locator": "^0.3.0",
     "morgan": "^1.8.2",
     "repl-extra": "^0.1.3",
@@ -31,6 +31,6 @@
     "superagent": "^3.6.0"
   },
   "devDependencies": {
-    "@maf/eslint-config": "^0.3.4"
+    "@maf/eslint-config": "^0.3.5"
   }
 }
