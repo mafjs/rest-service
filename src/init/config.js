@@ -10,6 +10,7 @@ module.exports = function restServiceInitConfig(rawConfig) {
     const publicBaseUrl = env.CONFIG_PUBLIC_BASE_URL || `http://localhost:${port}`;
 
     config.setRaw('.', {
+        mode: 'public',
         autoInit: true,
         logLevel: null,
         host,
