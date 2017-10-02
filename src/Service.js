@@ -79,6 +79,8 @@ class RestService {
         }
 
         this._app = init.server(this._logger, this._config, this._di);
+        this._rest.initApp(this._app, this._di);
+
         this._appInited = true;
     }
 
@@ -97,7 +99,8 @@ class RestService {
         this._restInited = true;
 
         return Promise.all(promises)
-            .then(() => this._rest.init(this._app, this._di));
+            .then(() => this._rest.initApp(this._app, this._di))
+            .then(() => this._rest.initMethods(this._app, this._di));
     }
 
     start() {
