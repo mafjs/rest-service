@@ -1009,9 +1009,9 @@ maf-logger@^0.6.1:
   dependencies:
     bunyan "^1.8.12"
 
-maf-rest@^0.16.0:
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/maf-rest/-/maf-rest-0.16.0.tgz#1cde1689f6860d3a796646a0ed8d94182307e9b0"
+maf-rest@^0.16.1:
+  version "0.16.1"
+  resolved "https://registry.yarnpkg.com/maf-rest/-/maf-rest-0.16.1.tgz#03084fe06ccb891c1bf56fa3c9b72f4b6f2efd1d"
   dependencies:
     body-parser "^1.18.2"
     lodash "^4.17.4"
@@ -1510,9 +1510,9 @@ strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
 
-superagent@^3.6.0:
-  version "3.6.1"
-  resolved "https://registry.yarnpkg.com/superagent/-/superagent-3.6.1.tgz#5780e09a5d1a94c62bb13d1f610bef5df6848343"
+superagent@^3.6.2:
+  version "3.6.2"
+  resolved "https://registry.yarnpkg.com/superagent/-/superagent-3.6.2.tgz#af87b454705e6b07ed3967bfe299428241681f33"
   dependencies:
     component-emitter "^1.2.0"
     cookiejar "^2.1.0"
