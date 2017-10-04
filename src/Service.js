@@ -13,15 +13,19 @@ const init = {
 
 class RestService {
     constructor(name, rawConfig) {
+        this._config = init.config(rawConfig);
+
+        this._name = `${this._config.get('mode')}-${name}`;
+
+        this._config.set('name', this._name);
+
         this.joi = joi;
 
         const logLevel = (rawConfig && rawConfig.logLevel) ? rawConfig.logLevel : null;
 
-        this._logger = init.logger(name, logLevel);
+        this._logger = init.logger(this._name, logLevel);
 
         init.globalErrorHandlers(this._logger);
-
-        this._config = init.config(rawConfig);
 
         this._di = {};
 
@@ -39,6 +43,10 @@ class RestService {
         if (this._config.get('autoInit') === true) {
             this.initApp();
         }
+    }
+
+    get name() {
+        return this._name;
     }
 
     get logger() {
