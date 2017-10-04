@@ -26,6 +26,7 @@ module.exports = function restServiceInitConfig(rawConfig) {
                 ':remote-addr',
                 ':remote-user',
                 '[:date[clf]]',
+                ':req[x-request-id]',
                 ':method',
                 ':url',
                 'HTTP/:http-version',
