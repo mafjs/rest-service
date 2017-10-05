@@ -1,5 +1,10 @@
 const Config = require('maf-config');
 
+/**
+ * @private
+ * @param {?Object} rawConfig
+ * @return {Config}
+ */
 module.exports = function restServiceInitConfig(rawConfig) {
     const config = new Config();
 

@@ -1,0 +1,16 @@
+{
+    "source": "./src",
+    "excludes": ["node_modules", "test"],
+    "destination": "./esdoc",
+    "plugins": [
+        {
+            "name": "esdoc-standard-plugin",
+            "option": {
+                "accessor": {"access": ["public"]}
+            }
+        },
+        {
+            "name": "esdoc-node"
+        }
+    ]
+}

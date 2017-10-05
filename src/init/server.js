@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const rfs = require('rotating-file-stream');
 
 /**
+ * @private
  * @param {Logger} logger
  * @param {Object} config
  * @return {Stream}
@@ -21,6 +22,13 @@ function initRotateStream(logger, config) {
     return stream;
 }
 
+/**
+ * @private
+ * @param {Logger} logger
+ * @param {Config} config
+ * @param {Object} di
+ * @return {Express}
+ */
 module.exports = function restServiceInitServer(logger, config, di) {
     const app = express();
 

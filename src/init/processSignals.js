@@ -1,3 +1,8 @@
+/**
+ * @private
+ * @param {Logger} logger
+ * @param {Express} server
+ */
 module.exports = function restServiceInitProcessSignals(logger, server) {
     const signals = {
         SIGINT: 2,

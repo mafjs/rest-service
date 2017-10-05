@@ -1,5 +1,11 @@
 const Logger = require('maf-logger');
 
+/**
+ * @private
+ * @param {String} name
+ * @param {String} configLogLevel
+ * @return {Logger}
+ */
 module.exports = function restServiceInitLogger(name, configLogLevel) {
     const logger = Logger.create(name);
 

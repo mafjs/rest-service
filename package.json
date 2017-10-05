@@ -5,6 +5,7 @@
   "main": "index.js",
   "private": false,
   "scripts": {
+    "docs": "rm -rf ./esdoc && esdoc . -c ./.esdoc.json",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint -c .eslintrc.js --ignore-path .gitignore .",
     "lint:fix": "npm run lint -- --fix",
@@ -31,6 +32,9 @@
     "superagent": "^3.6.2"
   },
   "devDependencies": {
-    "@maf/eslint-config": "^0.3.7"
+    "@maf/eslint-config": "^0.3.7",
+    "esdoc": "^1.0.3",
+    "esdoc-node": "^1.0.2",
+    "esdoc-standard-plugin": "^1.0.0"
   }
 }

@@ -1,3 +1,7 @@
+/**
+ * @private
+ * @param {Logger} logger
+ */
 module.exports = function restServiceInitGlobalErrorHandlers(logger) {
     process.on('uncaughtException', (error) => {
         logger.fatal(error);
