@@ -47,10 +47,6 @@ class RestService {
         this._restMethods = [];
 
         this._rest = init.rest(this._logger, this._config);
-
-        // if (this._config.get('autoInit') === true) {
-        //     this.initApp();
-        // }
     }
 
     /**
@@ -196,9 +192,9 @@ class RestService {
      */
     start() {
         return new Promise((resolve /* , reject */) => {
-            this.initApp();
+            this._initApp();
 
-            this.initRest()
+            this._initRest()
                 .then(() => {
                     this._listen();
                     resolve();
