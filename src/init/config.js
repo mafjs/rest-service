@@ -42,7 +42,7 @@ module.exports = function restServiceInitConfig(rawConfig) {
                 ':user-agent',
             ],
             filename: 'access.log',
-            path: '/var/log/app',
+            path: null,
             rotateInterval: '1d',
         },
     });

@@ -1,4 +1,9 @@
-const service = require('../')('myservice');
+const service = require('../')('myservice', {
+    port: 4000,
+    accessLog: {
+        path: `${__dirname}`,
+    },
+});
 
 service.addMethods({
     'GET /todos': (req, res) => {

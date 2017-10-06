@@ -38,15 +38,21 @@ module.exports = function restServiceInitServer(logger, config, di) {
 
     const accessLog = config.get('accessLog');
 
-    let accessLogFormat = accessLog.format;
+    if (typeof accessLog.path === 'string') {
+        logger.info(`accessLog path = ${accessLog.path}`);
 
-    if (Array.isArray(accessLogFormat)) {
-        accessLogFormat = accessLogFormat.join('\t');
+        let accessLogFormat = accessLog.format;
+
+        if (Array.isArray(accessLogFormat)) {
+            accessLogFormat = accessLogFormat.join('\t');
+        }
+
+        app.use(morgan(accessLogFormat, {
+            stream: initRotateStream(logger.getLogger('access-log'), accessLog),
+        }));
+    } else {
+        logger.info('accessLog off, set accessLog.path in config');
     }
-
-    app.use(morgan(accessLogFormat, {
-        stream: initRotateStream(logger.getLogger('access-log'), accessLog),
-    }));
 
     app.use(cors(config.get('cors')));
 
