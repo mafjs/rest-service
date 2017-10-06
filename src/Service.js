@@ -190,11 +190,16 @@ class RestService {
      */
     initServer() {
         return new Promise((resolve, reject) => {
+            if (this._serverInited) {
+                return resolve();
+            }
+
             this.init();
 
             this.initRestMethods()
                 .then(() => {
                     this._server = http.createServer(this._app);
+                    this._serverInited = true;
                     resolve();
                 })
                 .catch((error) => {
@@ -212,8 +217,6 @@ class RestService {
      */
     start() {
         return new Promise((resolve /* , reject */) => {
-            this.init();
-
             this.initServer()
                 .then(() => {
                     this._listen();
