@@ -13,6 +13,9 @@ service.addMethods({
     },
 });
 
+service.init();
+
 service.start();
+
 
 // curl -v http://localhost:3000/todos

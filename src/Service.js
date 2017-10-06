@@ -1,3 +1,4 @@
+const http = require('http');
 const joi = require('maf-rest/joi');
 
 /* eslint-disable global-require */
@@ -48,6 +49,7 @@ class RestService {
 
         this._app = null;
         this._server = null;
+        this._serverInited = false;
 
         this._rest = null;
         this._restEndpoint = null;
@@ -60,6 +62,14 @@ class RestService {
      */
     get app() {
         return this._app;
+    }
+
+    /**
+     * http server instance
+     * @return {HttpServer}
+     */
+    get server() {
+        return this._server;
     }
 
     /**
@@ -175,6 +185,25 @@ class RestService {
     }
 
     /**
+     * init http server
+     * @return {Promise}
+     */
+    initServer() {
+        return new Promise((resolve, reject) => {
+            this.init();
+
+            this.initRestMethods()
+                .then(() => {
+                    this._server = http.createServer(this._app);
+                    resolve();
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+    }
+
+    /**
      * - init express app, if not inited before
      * - init rest instance, if not inited before
      * - start express server
@@ -185,7 +214,7 @@ class RestService {
         return new Promise((resolve /* , reject */) => {
             this.init();
 
-            this.initRestMethods()
+            this.initServer()
                 .then(() => {
                     this._listen();
                     resolve();
@@ -240,7 +269,7 @@ class RestService {
         const host = this._config.get('host');
         const port = this._config.get('port');
 
-        this._server = this._app.listen(port, host, () => {
+        this._server.listen(port, host, () => {
             this._logger.info(`listen on ${host}:${port}`);
         });
 
