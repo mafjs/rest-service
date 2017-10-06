@@ -11,8 +11,8 @@ const todosApi = require('./todosApi');
 
 service.di = {
     api: {
-        todos: todosApi
-    }
+        todos: todosApi,
+    },
 };
 
 const joi = service.joi;
@@ -21,40 +21,43 @@ service.addMethods({
     // create todo
     'POST /todos': {
         schema: {
-            body: joi.object().required().keys({ title: joi.string().required() })
+            body: joi.object().required()
+                .keys({title: joi.string().required()}),
         },
 
         handler(req, res) {
             const data = req.di.api.todos.create(req.body);
             res.result(data);
-        }
+        },
     },
 
     // search todos
     'GET /todos': {
         schema: {
             query: joi.object().keys({
-                limit: joi.number().integer().positive().min(1).max(100).default(5),
-                skip: joi.number().integer().positive().min(0).max(100).default(0)
-            })
+                limit: joi.number().integer().positive()
+                    .min(1).max(100).default(5),
+                skip: joi.number().integer().positive()
+                    .min(0).max(100).default(0),
+            }),
         },
 
         handler(req, res) {
             const limit = req.query.limit;
             const skip = req.query.skip;
 
-            req.logger.debug({ limit, skip }, 'searching todos');
+            req.logger.debug({limit, skip}, 'searching todos');
 
             const data = req.di.api.todos.find(limit, skip);
 
             res.result(data);
-        }
+        },
     },
 
     // get todo by id
     'GET /todos/:id': {
         schema: {
-            path: joi.object().required().keys({ id: joi.number().required() })
+            path: joi.object().required().keys({id: joi.number().required()}),
         },
 
         handler(req, res) {
@@ -63,17 +66,17 @@ service.addMethods({
             if (!todo) {
                 return res.notFound({
                     message: 'todo not found',
-                    code: 'NOT_FOUND'
+                    code: 'NOT_FOUND',
                 });
             }
 
             return res.result(todo);
-        }
+        },
     },
 
     'DELETE /todos/:id': {
         schema: {
-            path: joi.object().required().keys({ id: joi.number().required() })
+            path: joi.object().required().keys({id: joi.number().required()}),
         },
 
         handler(req, res) {
@@ -82,13 +85,13 @@ service.addMethods({
             if (!todo) {
                 return res.notFound({
                     message: 'todo not found',
-                    code: 'NOT_FOUND'
+                    code: 'NOT_FOUND',
                 });
             }
 
             return res.result(true);
-        }
-    }
+        },
+    },
 });
 
 service.start();

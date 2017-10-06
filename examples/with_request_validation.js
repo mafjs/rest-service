@@ -9,16 +9,16 @@ service.addMethods({
                 limit: joi.number().integer()
                     .min(1)
                     .max(5)
-                    .default(5)
-            })
+                    .default(5),
+            }),
         },
 
         handler: (req, res) => {
             const todos = [1, 2, 3, 4, 5];
 
             res.result(todos.slice(0, req.query.limit));
-        }
-    }
+        },
+    },
 });
 
 service.start();

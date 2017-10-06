@@ -21,9 +21,9 @@ module.exports = function restServiceInitLogger(name, configLogLevel) {
         logLevel = 'DEBUG';
     }
 
-    logger.info(`logLevel = ${logLevel}`);
-
     logger.level(logLevel);
+
+    logger.info(`logLevel = ${logLevel}`);
 
     return logger;
 };

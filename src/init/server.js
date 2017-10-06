@@ -12,7 +12,7 @@ const rfs = require('rotating-file-stream');
 function initRotateStream(logger, config) {
     const stream = rfs(config.filename, {
         interval: config.rotateInterval,
-        path: config.path
+        path: config.path,
     });
 
     stream.on('error', (error) => {
@@ -45,7 +45,7 @@ module.exports = function restServiceInitServer(logger, config, di) {
     }
 
     app.use(morgan(accessLogFormat, {
-        stream: initRotateStream(logger.getLogger('access-log'), accessLog)
+        stream: initRotateStream(logger.getLogger('access-log'), accessLog),
     }));
 
     app.use(cors(config.get('cors')));

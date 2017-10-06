@@ -3,9 +3,9 @@ const service = require('../')('myservice');
 service.addMethods({
     'GET /todos': (req, res) => {
         res.result([
-            1, 2, 3
+            1, 2, 3,
         ]);
-    }
+    },
 });
 
 service.start();

@@ -23,6 +23,10 @@ const service = require('@maf/rest-service')('myservice');
 service.init();
 ```
 
+Optional, if you not need add middlewaries to express app before rest methods
+
+this will be inited on start, if not
+
 - create express app
 - create morgan access logger
 - disable express x-powered-by headers, etag

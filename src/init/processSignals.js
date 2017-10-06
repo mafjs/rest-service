@@ -6,7 +6,7 @@
 module.exports = function restServiceInitProcessSignals(logger, server) {
     const signals = {
         SIGINT: 2,
-        SIGTERM: 15
+        SIGTERM: 15,
     };
 
     const connections = {};
@@ -21,6 +21,10 @@ module.exports = function restServiceInitProcessSignals(logger, server) {
         });
     });
 
+    /**
+     * @param {String} signal
+     * @param {Number} value
+     */
     function shutdown(signal, value) {
         const promises = [];
 

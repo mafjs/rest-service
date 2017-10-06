@@ -24,7 +24,7 @@ module.exports = function restServiceInitConfig(rawConfig) {
         cors: {
             origin: '*',
             preflightContinue: true,
-            methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS']
+            methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
         },
         accessLog: {
             format: [
@@ -39,12 +39,12 @@ module.exports = function restServiceInitConfig(rawConfig) {
                 ':res[content-length]',
                 ':response-time',
                 ':referrer',
-                ':user-agent'
+                ':user-agent',
             ],
             filename: 'access.log',
             path: '/var/log/app',
-            rotateInterval: '1d'
-        }
+            rotateInterval: '1d',
+        },
     });
 
     if (typeof rawConfig !== 'undefined') {

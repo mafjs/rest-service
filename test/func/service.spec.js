@@ -62,5 +62,4 @@ tap.test('should delete one', (t) => {
             t.same(res.body, {result: []});
             t.done();
         });
-
 });

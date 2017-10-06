@@ -7,10 +7,13 @@ const init = {
     globalErrorHandlers: require('./init/globalErrorHandlers'),
     server: require('./init/server'),
     processSignals: require('./init/processSignals'),
-    rest: require('./init/rest')
+    rest: require('./init/rest'),
 };
 /* eslint-enable */
 
+/**
+ * Rest Service class
+ */
 class RestService {
     /**
      * - create config merged with rawConfig if exists
@@ -29,7 +32,9 @@ class RestService {
 
         this.joi = joi;
 
-        const logLevel = (rawConfig && rawConfig.logLevel) ? rawConfig.logLevel : null;
+        const logLevel = (rawConfig && rawConfig.logLevel)
+            ? rawConfig.logLevel
+            : null;
 
         this._logger = init.logger(this._name, logLevel);
 
@@ -39,14 +44,14 @@ class RestService {
 
         this._appInited = false;
         this._restInited = false;
+        this._restMethodsInited = false;
 
         this._app = null;
         this._server = null;
 
         this._rest = null;
+        this._restEndpoint = null;
         this._restMethods = [];
-
-        this._rest = init.rest(this._logger, this._config);
     }
 
     /**
@@ -130,7 +135,7 @@ class RestService {
      * @param {String} endpoint
      */
     setEndpoint(endpoint) {
-        this._rest.setEndpoint(endpoint);
+        this._restEndpoint = endpoint;
     }
 
     /**
@@ -140,21 +145,7 @@ class RestService {
      */
     init() {
         this._initApp();
-    }
-
-    /**
-     * - create express application
-     * @private
-     */
-    _initApp() {
-        if (this._appInited) {
-            return;
-        }
-
-        this._app = init.server(this._logger, this._config, this._di);
-        this._rest.initApp(this._app, this._di);
-
-        this._appInited = true;
+        this._initRest();
     }
 
     /**
@@ -164,8 +155,8 @@ class RestService {
      * @private
      * @return {[type]}
      */
-    _initRest() {
-        if (this._restInited) {
+    initRestMethods() {
+        if (this._restMethodsInited) {
             return Promise.resolve();
         }
 
@@ -176,7 +167,7 @@ class RestService {
             promises.push(this._rest.addMethods(methods));
         });
 
-        this._restInited = true;
+        this._restMethodsInited = true;
 
         return Promise.all(promises)
             .then(() => this._rest.initApp(this._app, this._di))
@@ -192,9 +183,9 @@ class RestService {
      */
     start() {
         return new Promise((resolve /* , reject */) => {
-            this._initApp();
+            this.init();
 
-            this._initRest()
+            this.initRestMethods()
                 .then(() => {
                     this._listen();
                     resolve();
@@ -204,6 +195,39 @@ class RestService {
                     process.exit(255);
                 });
         });
+    }
+
+    /**
+     * - create express application
+     * @private
+     */
+    _initApp() {
+        if (this._appInited) {
+            return;
+        }
+
+        this._app = init.server(this._logger, this._config, this._di);
+
+        this._appInited = true;
+    }
+
+    /**
+     * @private
+     * @return {Boolean}
+     */
+    _initRest() {
+        if (this._restInited) {
+            return true;
+        }
+
+        this._rest = init.rest(this._logger, this._config);
+        this._rest.initApp(this._app, this._di);
+
+        if (this._restEndpoint) {
+            this._rest.setEndpoint(this._restEndpoint);
+        }
+
+        return true;
     }
 
     /**
