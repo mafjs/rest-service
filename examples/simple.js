@@ -1,7 +1,7 @@
 const service = require('../')('myservice', {
     port: 4000,
     logger: {
-        level: 'trace',
+        level: 'info',
         src: false,
     },
     accessLog: {
@@ -11,6 +11,7 @@ const service = require('../')('myservice', {
 
 service.addMethods({
     'GET /todos': (req, res) => {
+        req.logger.debug('debug message');
         res.result([
             1, 2, 3,
         ]);
