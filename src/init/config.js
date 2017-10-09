@@ -17,7 +17,10 @@ module.exports = function restServiceInitConfig(rawConfig) {
     config.setRaw('.', {
         mode: env.CONFIG_MODE || 'public',
         autoInit: true,
-        logLevel: null,
+        logger: {
+            level: null,
+            src: false
+        },
         host,
         port,
         publicBaseUrl,

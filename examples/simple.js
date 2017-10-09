@@ -1,5 +1,9 @@
 const service = require('../')('myservice', {
     port: 4000,
+    logger: {
+        level: 'trace',
+        src: false,
+    },
     accessLog: {
         path: `${__dirname}`,
     },

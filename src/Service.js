@@ -33,11 +33,11 @@ class RestService {
 
         this.joi = joi;
 
-        const logLevel = (rawConfig && rawConfig.logLevel)
-            ? rawConfig.logLevel
-            : null;
+        const loggerConfig = (rawConfig && rawConfig.logger)
+            ? rawConfig.logger
+            : {};
 
-        this._logger = init.logger(this._name, logLevel);
+        this._logger = init.logger(this._name, loggerConfig);
 
         init.globalErrorHandlers(this._logger);
 
@@ -180,7 +180,7 @@ class RestService {
         this._restMethodsInited = true;
 
         return Promise.all(promises)
-            .then(() => this._rest.initApp(this._app, this._di))
+            .then(() => this._initRest())
             .then(() => this._rest.initMethods(this._app, this._di));
     }
 
@@ -258,6 +258,8 @@ class RestService {
         if (this._restEndpoint) {
             this._rest.setEndpoint(this._restEndpoint);
         }
+
+        this._restInited = true;
 
         return true;
     }
