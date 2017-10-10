@@ -7,6 +7,8 @@ module.exports = () => {
     // eslint-disable-next-line
     const service = require(`${__dirname}/../../../index.js`)('myservice', {logLevel: 'error'});
 
+    service.logger.level('error');
+
     service.setEndpoint('/api');
 
     // eslint-disable-next-line

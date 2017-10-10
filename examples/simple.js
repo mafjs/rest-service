@@ -1,7 +1,7 @@
 const service = require('../')('myservice', {
     port: 4000,
     logger: {
-        level: 'info',
+        level: 'trace',
         src: false,
     },
     accessLog: {
