@@ -2096,9 +2096,9 @@ maf-rest@^0.19.0:
     maf-http "^0.13.0"
     maf-kind-of "^0.1.0"
 
-maf-service-locator@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/maf-service-locator/-/maf-service-locator-0.3.0.tgz#ef2e68cdd77bfd0f26ceedbe8d0ccff10ef62e4d"
+maf-service-locator@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/maf-service-locator/-/maf-service-locator-0.4.0.tgz#cfc38d8d47a6f4700e676f76a710f30b66e84bb0"
 
 marked@0.3.6:
   version "0.3.6"
