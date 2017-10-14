@@ -29,9 +29,24 @@ module.exports = () => {
                         .keys({title: joi.string().required()})
             },
 
+            inited: [
+                (req, res, next) => {
+                    req.user = {id: 1};
+                    next();
+                }
+            ],
+
+            validated: (req, res, next) => {
+                req.user.login = 'fake';
+                next();
+            },
+
             handler(req, res) {
                 const data = req.di.api.todos.create(req.body);
-                res.result(data);
+                res.result({
+                    todo: data,
+                    user: req.user
+                });
             }
         },
 
@@ -39,16 +54,13 @@ module.exports = () => {
         'GET /todos': {
             schema: {
                 query: joi.object().keys({
-                    limit: joi.number().integer().positive().min(1).max(100)
-                              .default(5),
-                    skip: joi.number().integer().positive().min(0).max(100)
-                             .default(0)
+                    limit: joi.number().integer().positive().min(1).max(100).default(5),
+                    skip: joi.number().integer().positive().min(0).max(100).default(0)
                 })
             },
 
             handler(req, res) {
-                const limit = req.query.limit;
-                const skip = req.query.skip;
+                const {limit, skip} = req.query;
 
                 req.logger.debug({limit, skip}, 'searching todos');
 
@@ -61,8 +73,7 @@ module.exports = () => {
         // get todo by id
         'GET /todos/:id': {
             schema: {
-                path: joi.object().required()
-                            .keys({id: joi.number().required()})
+                path: joi.object().required().keys({id: joi.number().required()})
             },
 
             handler(req, res) {
@@ -81,8 +92,7 @@ module.exports = () => {
 
         'DELETE /todos/:id': {
             schema: {
-                path: joi.object().required()
-                         .keys({id: joi.number().required()})
+                path: joi.object().required().keys({id: joi.number().required()})
             },
 
             handler(req, res) {

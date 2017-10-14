@@ -19,7 +19,10 @@ tap.test('should create todos', (t) => {
     .expect(200)
     .then((res) => {
         t.type(res.headers['x-request-id'], 'string');
-        t.same(res.body, {result: {title: 'test', id: 1}});
+        t.same(res.body, {result: {
+            todo: {title: 'test', id: 1},
+            user: {id: 1, login: 'fake'}
+        }});
         t.done();
     });
 });

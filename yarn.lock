@@ -1121,9 +1121,9 @@ expand-range@^1.8.1:
   dependencies:
     fill-range "^2.1.0"
 
-express@^4.16.1:
-  version "4.16.1"
-  resolved "https://registry.yarnpkg.com/express/-/express-4.16.1.tgz#6b33b560183c9b253b7b62144df33a4654ac9ed0"
+express@^4.16.2:
+  version "4.16.2"
+  resolved "https://registry.yarnpkg.com/express/-/express-4.16.2.tgz#e35c6dfe2d64b7dca0a5cd4f21781be3299e076c"
   dependencies:
     accepts "~1.3.4"
     array-flatten "1.1.1"
@@ -1800,17 +1800,9 @@ istanbul-reports@^1.1.1:
   dependencies:
     handlebars "^4.0.3"
 
-joi@^11.1.1:
-  version "11.1.1"
-  resolved "https://registry.yarnpkg.com/joi/-/joi-11.1.1.tgz#08194537d3b9c796bac8666deb3a825c1a5d83c1"
-  dependencies:
-    hoek "4.x.x"
-    isemail "3.x.x"
-    topo "2.x.x"
-
-joi@^11.3.3:
-  version "11.3.3"
-  resolved "https://registry.yarnpkg.com/joi/-/joi-11.3.3.tgz#dcc95755df2b1a7576c21375728c05e4b8a5c924"
+joi@^11.3.4:
+  version "11.3.4"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-11.3.4.tgz#c25fc2598c3847865f92c51b5249b519af3e51cb"
   dependencies:
     hoek "4.x.x"
     isemail "3.x.x"
@@ -2072,11 +2064,11 @@ maf-error@^1.2.0:
   dependencies:
     terror "1.4.x"
 
-maf-http@^0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/maf-http/-/maf-http-0.12.0.tgz#2554ff122f6abbb991310578a27a1a7093c95e9a"
+maf-http@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/maf-http/-/maf-http-0.13.0.tgz#7b8f59ffe6290ce8c8b08b2959b3e9797c373d29"
   dependencies:
-    joi "^11.1.1"
+    joi "^11.3.4"
     lodash.get "^4.4.2"
     lodash.has "^4.5.2"
     lodash.pick "^4.4.0"
@@ -2094,14 +2086,14 @@ maf-logger@^0.6.1:
   dependencies:
     bunyan "^1.8.12"
 
-maf-rest@^0.18.0:
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/maf-rest/-/maf-rest-0.18.0.tgz#260bc0042e2b9e49272b0e00359811c8545d0a24"
+maf-rest@^0.19.0:
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/maf-rest/-/maf-rest-0.19.0.tgz#6ee733545e76d4e54683fa6a0a6243a8505d51f3"
   dependencies:
     body-parser "^1.18.2"
     lodash "^4.17.4"
     maf-error "^1.2.0"
-    maf-http "^0.12.0"
+    maf-http "^0.13.0"
     maf-kind-of "^0.1.0"
 
 maf-service-locator@^0.3.0:
