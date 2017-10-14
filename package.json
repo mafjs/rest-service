@@ -32,7 +32,7 @@
     "superagent": "^3.6.3"
   },
   "devDependencies": {
-    "@maf/eslint-config": "0.4.2",
+    "@maf/eslint-config": "0.5.0",
     "esdoc": "^1.0.3",
     "esdoc-node": "^1.0.2",
     "esdoc-standard-plugin": "^1.0.0",

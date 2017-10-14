@@ -6,7 +6,7 @@
 module.exports = function restServiceInitProcessSignals(logger, server) {
     const signals = {
         SIGINT: 2,
-        SIGTERM: 15,
+        SIGTERM: 15
     };
 
     const connections = {};

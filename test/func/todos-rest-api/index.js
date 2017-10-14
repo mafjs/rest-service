@@ -4,20 +4,18 @@
 // remove: curl -s -XDELETE http://localhost:3000/api/todos/1
 
 module.exports = () => {
-    // eslint-disable-next-line
     const service = require(`${__dirname}/../../../index.js`)('myservice', {logLevel: 'error'});
 
     service.logger.level('error');
 
     service.setEndpoint('/api');
 
-    // eslint-disable-next-line
     const todosApi = require(`${__dirname}/todosApi`);
 
     service.di = {
         api: {
-            todos: todosApi,
-        },
+            todos: todosApi
+        }
     };
 
     const joi = service.joi;
@@ -28,13 +26,13 @@ module.exports = () => {
             schema: {
                 body: joi.object()
                         .required()
-                        .keys({title: joi.string().required()}),
+                        .keys({title: joi.string().required()})
             },
 
             handler(req, res) {
                 const data = req.di.api.todos.create(req.body);
                 res.result(data);
-            },
+            }
         },
 
         // search todos
@@ -44,8 +42,8 @@ module.exports = () => {
                     limit: joi.number().integer().positive().min(1).max(100)
                               .default(5),
                     skip: joi.number().integer().positive().min(0).max(100)
-                             .default(0),
-                }),
+                             .default(0)
+                })
             },
 
             handler(req, res) {
@@ -57,14 +55,14 @@ module.exports = () => {
                 const data = req.di.api.todos.find(limit, skip);
 
                 res.result(data);
-            },
+            }
         },
 
         // get todo by id
         'GET /todos/:id': {
             schema: {
                 path: joi.object().required()
-                            .keys({id: joi.number().required()}),
+                            .keys({id: joi.number().required()})
             },
 
             handler(req, res) {
@@ -73,18 +71,18 @@ module.exports = () => {
                 if (!todo) {
                     return res.notFound({
                         message: 'todo not found',
-                        code: 'NOT_FOUND',
+                        code: 'NOT_FOUND'
                     });
                 }
 
                 return res.result(todo);
-            },
+            }
         },
 
         'DELETE /todos/:id': {
             schema: {
                 path: joi.object().required()
-                         .keys({id: joi.number().required()}),
+                         .keys({id: joi.number().required()})
             },
 
             handler(req, res) {
@@ -93,13 +91,13 @@ module.exports = () => {
                 if (!todo) {
                     return res.notFound({
                         message: 'todo not found',
-                        code: 'NOT_FOUND',
+                        code: 'NOT_FOUND'
                     });
                 }
 
                 return res.result(true);
-            },
-        },
+            }
+        }
     });
 
     service.init();

@@ -41,7 +41,7 @@ const todosApi = {
         delete todos[id];
 
         return true;
-    },
+    }
 };
 
 module.exports = todosApi;

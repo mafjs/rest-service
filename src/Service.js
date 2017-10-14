@@ -1,16 +1,14 @@
 const http = require('http');
 const joi = require('maf-rest/joi');
 
-/* eslint-disable global-require */
 const init = {
     logger: require('./init/logger'),
     config: require('./init/config'),
     globalErrorHandlers: require('./init/globalErrorHandlers'),
     server: require('./init/server'),
     processSignals: require('./init/processSignals'),
-    rest: require('./init/rest'),
+    rest: require('./init/rest')
 };
-/* eslint-enable */
 
 /**
  * Rest Service class

@@ -1,6 +1,3 @@
 module.exports = {
-    extends: '@maf/eslint-config',
-    env: {
-        node: true
-    }
+    extends: '@maf/eslint-config'
 };
