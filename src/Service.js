@@ -154,6 +154,12 @@ class RestService {
     init() {
         this._initApp();
         this._initRest();
+
+        // add service name to req.ctx.service
+        this._app.use((req, res, next) => {
+            req.ctx.service = this._name;
+            next();
+        });
     }
 
     /**

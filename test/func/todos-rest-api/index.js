@@ -107,6 +107,15 @@ module.exports = () => {
 
                 return res.result(true);
             }
+        },
+
+        'GET /status': {
+            handler(req, res) {
+                res.result({
+                    routeName: req.ctx.routeName,
+                    service: req.ctx.service
+                });
+            }
         }
     });
 

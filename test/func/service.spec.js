@@ -66,3 +66,18 @@ tap.test('should delete one', (t) => {
             t.done();
         });
 });
+
+tap.test('should get routeName and service name', (t) => {
+    return request(service.app)
+        .get('/api/status')
+        .expect(200)
+        .then((res) => {
+            t.type(res.headers['x-request-id'], 'string');
+            t.same(res.body, {
+                result: {
+                    routeName: 'GET/status',
+                    service: 'public-myservice'
+                }
+            });
+        });
+});
