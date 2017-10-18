@@ -21,7 +21,15 @@ tap.test('should create todos', (t) => {
         t.type(res.headers['x-request-id'], 'string');
         t.same(res.body, {result: {
             todo: {title: 'test', id: 1},
-            user: {id: 1, login: 'fake'}
+            middlewares: [
+                'globalBeforeInit',
+                'beforeInit',
+                'globalInited',
+                'inited1',
+                'inited2',
+                'globalValidated',
+                'validated'
+            ]
         }});
         t.done();
     });

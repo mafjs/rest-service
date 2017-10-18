@@ -18,6 +18,31 @@ module.exports = () => {
         }
     };
 
+    service.globalMiddlewares = {
+        beforeInit: [
+            (req, res, next) => {
+                if (!res._middlewares) {
+                    res._middlewares = [];
+                }
+
+                res._middlewares.push('globalBeforeInit');
+                next();
+            }
+        ],
+        inited: [
+            (req, res, next) => {
+                res._middlewares.push('globalInited');
+                next();
+            }
+        ],
+        validated: [
+            (req, res, next) => {
+                res._middlewares.push('globalValidated');
+                next();
+            }
+        ]
+    };
+
     const joi = service.joi;
 
     service.addMethods({
@@ -29,15 +54,26 @@ module.exports = () => {
                         .keys({title: joi.string().required()})
             },
 
+            beforeInit: [
+                (req, res, next) => {
+                    res._middlewares.push('beforeInit');
+                    next();
+                }
+            ],
+
             inited: [
                 (req, res, next) => {
-                    req.user = {id: 1};
+                    res._middlewares.push('inited1');
+                    next();
+                },
+                (req, res, next) => {
+                    res._middlewares.push('inited2');
                     next();
                 }
             ],
 
             validated: (req, res, next) => {
-                req.user.login = 'fake';
+                res._middlewares.push('validated');
                 next();
             },
 
@@ -45,7 +81,7 @@ module.exports = () => {
                 const data = req.di.api.todos.create(req.body);
                 res.result({
                     todo: data,
-                    user: req.user
+                    middlewares: res._middlewares
                 });
             }
         },

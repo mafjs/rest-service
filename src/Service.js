@@ -31,6 +31,12 @@ class RestService {
 
         this.joi = joi;
 
+        this.globalMiddlewares = {
+            beforeInit: null,
+            inited: null,
+            validated: null
+        };
+
         const loggerConfig = (rawConfig && rawConfig.logger)
             ? rawConfig.logger
             : {};
@@ -257,6 +263,9 @@ class RestService {
         }
 
         this._rest = init.rest(this._logger, this._config);
+
+        this._rest.globalMiddlewares = this.globalMiddlewares;
+
         this._rest.initApp(this._app, this._di);
 
         if (this._restEndpoint) {
