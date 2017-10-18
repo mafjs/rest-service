@@ -22,7 +22,7 @@
     "maf-config": "^1.2.0",
     "maf-error": "^1.2.0",
     "maf-logger": "^0.6.1",
-    "maf-rest": "^0.21.0",
+    "maf-rest": "^0.22.0",
     "maf-service-locator": "^0.4.0",
     "morgan": "^1.8.2",
     "repl-extra": "^0.1.3",
