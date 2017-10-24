@@ -137,9 +137,11 @@ class RestService {
      * add REST methods
      *
      * @param {Object} methods
+     * @return {this}
      */
     addMethods(methods) {
         this._restMethods.push(methods);
+        return this;
     }
 
     /**
@@ -147,9 +149,11 @@ class RestService {
      *
      * @example service.setEndpoint('/api/v1');
      * @param {String} endpoint
+     * @return {this}
      */
     setEndpoint(endpoint) {
         this._restEndpoint = endpoint;
+        return this;
     }
 
     /**

@@ -17,18 +17,17 @@ yarn add @maf/rest-service@latest
 ### simple
 
 ```js
-const service = require('@maf/rest-service')('myservice');
+require('@maf/rest-service')('simple-service', {port: 4000})
+    .addMethods({
+        'GET /todos': (req, res) => {
+            req.logger.debug(`req.id = ${req.ctx.id}`);
 
-service.addMethods({
-    'GET /todos': (req, res) => {
-        const todos = [1, 2, 3, 4, 5];
-        res.result(todos);
-    }
-});
+            res.result([1, 2, 3]);
+        }
+    })
+    .start();
 
-service.start();
-
-// curl -v http://localhost:3000/todos
+// curl -v http://localhost:4000/todos
 ```
 
 ### with request validation

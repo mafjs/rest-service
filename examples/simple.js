@@ -1,26 +1,13 @@
-const service = require('../')('myservice', {
-    port: 4000,
-    logger: {
-        level: 'trace',
-        src: false
-    },
-    accessLog: {
-        path: `${__dirname}`
-    }
-});
+require('../')('simple-service', {port: 4000, logger: {level: 'debug'}})
+    .setEndpoint('/api/v1')
+    .addMethods({
+        'GET /todos': (req, res) => {
+            req.logger.debug(`req.id = ${req.ctx.id}`);
 
-service.addMethods({
-    'GET /todos': (req, res) => {
-        req.logger.debug('debug message');
-        res.result([
-            1, 2, 3
-        ]);
-    }
-});
+            res.result([1, 2, 3]);
+        }
+    })
+    .start();
 
-service.init();
-
-service.start();
-
-
-// curl -v http://localhost:3000/todos
+// node examples/simple.js | bunyan -o short -L
+// curl -v http://localhost:4000/api/v1/todos
