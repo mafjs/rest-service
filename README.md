@@ -18,15 +18,14 @@ yarn add @maf/rest-service@latest
 
 ```js
 require('@maf/rest-service')('simple-service', {port: 4000})
-    .addMethods(
-        {
-            'GET /todos': (req, res) => {
-                req.logger.debug(`req.id = ${req.ctx.id}`);
+    .setEndpoint('/api/v1')
+    .addMethods({
+        'GET /todos': (req, res) => {
+            req.logger.debug(`req.id = ${req.ctx.id}`);
 
-                res.result([1, 2, 3]);
-            }
+            res.result([1, 2, 3]);
         }
-    )
+    })
     .start();
 
 // curl -v http://localhost:4000/todos
