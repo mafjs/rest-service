@@ -63,8 +63,6 @@ service.start();
 
 ### todos REST API example
 
-see [examples/todos_rest_api](https://github.com/mafjs/rest-service/blob/master/examples/todos_rest_api/index.js)
+see [examples/todos-rest-api](https://github.com/mafjs/rest-service/blob/master/examples/todos-rest-api/index.js)
 
-
-
-more examples => https://github.com/mafjs/rest-service-example
+<!-- more examples => https://github.com/mafjs/rest-service-example -->
