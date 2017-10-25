@@ -1,8 +1,5 @@
 # @maf/rest-service
 
-stability: unstable
-
-
 ## install
 
 ```
@@ -28,13 +25,15 @@ require('@maf/rest-service')('simple-service', {port: 4000})
     })
     .start();
 
-// curl -v http://localhost:4000/todos
+// curl -v http://localhost:4000/api/v1/todos
 ```
 
 ### with request validation
 
 ```js
 const service = require('@maf/rest-service')('myservice');
+
+service.setEndpoint('/api/v1');
 
 const joi = service.joi;
 
@@ -55,9 +54,9 @@ service.addMethods({
 
 service.start();
 
-// curl -v http://localhost:3000/todos
-// curl -v http://localhost:3000/todos?limit=3
-// curl -v http://localhost:3000/todos?limit=10
+// curl -v http://localhost:3000/api/v1/todos
+// curl -v http://localhost:3000/api/v1/todos?limit=3
+// curl -v http://localhost:3000/api/v1/todos?limit=10
 ```
 
 ### todos REST API example
