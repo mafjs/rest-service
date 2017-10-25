@@ -1,5 +1,7 @@
 # @maf/rest-service
 
+[![npm version](https://badge.fury.io/js/%40maf%2Frest-service.svg)](https://badge.fury.io/js/%40maf%2Frest-service)
+
 ## install
 
 ```
