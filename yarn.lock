@@ -2064,9 +2064,9 @@ maf-error@^1.2.0:
   dependencies:
     terror "1.4.x"
 
-maf-http@^0.15.0:
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/maf-http/-/maf-http-0.15.0.tgz#292ae5bd201e8c0f67bcbf11d4fa6a5be585a61f"
+maf-http@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/maf-http/-/maf-http-0.16.0.tgz#bd9e46d4bc0d4dcd3e7e993859f1ad8c5bfde59e"
   dependencies:
     joi "^11.3.4"
     lodash.get "^4.4.2"
@@ -2086,14 +2086,14 @@ maf-logger@^0.6.1:
   dependencies:
     bunyan "^1.8.12"
 
-maf-rest@^0.22.0:
-  version "0.22.0"
-  resolved "https://registry.yarnpkg.com/maf-rest/-/maf-rest-0.22.0.tgz#94e99a1ccbc531c41f234aa74f808a6c6ae63adf"
+maf-rest@^0.23.0:
+  version "0.23.0"
+  resolved "https://registry.yarnpkg.com/maf-rest/-/maf-rest-0.23.0.tgz#bf16e6876b24ca66a0e50ba69c3ac32f608a9fa0"
   dependencies:
     body-parser "^1.18.2"
     lodash "^4.17.4"
     maf-error "^1.2.0"
-    maf-http "^0.15.0"
+    maf-http "^0.16.0"
     maf-kind-of "^0.1.0"
 
 maf-service-locator@^0.4.0:
