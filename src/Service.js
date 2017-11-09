@@ -244,6 +244,29 @@ class RestService {
     }
 
     /**
+     * process.exit
+     *
+     * @param {?Error} error
+     * @param {?Number} code
+     */
+    exit(error = null, code = 0) {
+        if (typeof error === 'number') {
+            code = error;
+        } else if (error !== null) {
+            this._logger.error(error);
+            if (!code) {
+                code = 255;
+            }
+        }
+
+        this._logger.info(`service.exit code = ${code}`);
+
+        process.nextTick(() => {
+            process.exit(code);
+        });
+    }
+
+    /**
      * - create express application
      * @private
      */
