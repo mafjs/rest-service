@@ -912,9 +912,9 @@ esdoc-lint-plugin@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/esdoc-lint-plugin/-/esdoc-lint-plugin-1.0.1.tgz#87bee6403e676c087f61be92c452d60f2c6a70e5"
 
-esdoc-node@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/esdoc-node/-/esdoc-node-1.0.2.tgz#3e21e2e05f9f3522060001e638b652f30ab1ab12"
+esdoc-node@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/esdoc-node/-/esdoc-node-1.0.3.tgz#b02acf45249bf0a4483d2fc455e3bdb1475af327"
 
 esdoc-publish-html-plugin@^1.0.0:
   version "1.1.0"
